@@ -15,6 +15,41 @@ Picture guard;
 
 vector<Picture> input;
 
+const int MAX_TAG = 12;
+
+Picture readPicture()
+{
+    int m;
+    char s[MAX_TAG];
+    Picture pic;
+
+    scanf(" %c %d", &pic.type, &m);
+
+    for (int i = 0; i < m; i++)
+    {
+        scanf("%s", s);
+
+        pic.tags.push_back(s);
+    }
+
+    return pic;
+}
+
+vector<Picture> readPictures()
+{
+    int n;
+    vector<Picture> pics;
+
+    cin>>n;
+
+    for (int i = 0; i < n; i++)
+    {
+        pics.push_back(readPicture());
+    }
+
+    return pics;
+}
+
 class Slide {
 public:
   Slide(Picture &a) first(a), second(guard) {
@@ -65,12 +100,6 @@ public:
   vector<Slide> show;
 
   ull evaluate() {
-    ull ret = 0;
 
-    for (int i = 0; i < show.size() - 1; i++) {
-      ret += show[i] + show[i+1];
-    }
-
-    return ret;
   }
 };
