@@ -72,23 +72,22 @@ public:
       tags.insert(tag);
   }
 
- // nie działa
-  // Slide& operator=(const Slide& s)
-  // {
-  //     first = s.first;
-  //     second = s.second;
-  //     tags = s.tags;
-  //
-  //     return *this;
-  // }
-  //
-  // void swap(Slide &a, Slide &b)
-  // {cerr<<a.first.id<<" "<<b.first.id<<endl;
-  //     Slide tmp = a;
-  //     a = b;
-  //     b = tmp;
-  //     cerr<<a.first.id<<" "<<b.first.id<<endl;
-  // }
+  Slide& operator=(const Slide& s)
+  {
+      first = s.first;
+      second = s.second;
+      tags = s.tags;
+
+      return *this;
+  }
+
+  void swap(Slide &a, Slide &b)
+  {cerr<<a.first.id<<" "<<b.first.id<<endl;
+      Slide tmp = a;
+      a = b;
+      b = tmp;
+      cerr<<a.first.id<<" "<<b.first.id<<endl;
+  }
 
   Picture first;
   Picture second;
@@ -148,3 +147,8 @@ public:
     }
   }
 };
+
+int rnd(int a, int b)
+{
+    return (rand() % (b - a + 1)) + a;
+}
