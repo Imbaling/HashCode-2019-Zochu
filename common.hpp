@@ -88,8 +88,8 @@ public:
       b = tmp;
   }
 
-  Picture &first;
-  Picture &second;
+  Picture first;
+  Picture second;
 
   set<string> tags;
 
@@ -121,6 +121,10 @@ public:
 class Slideshow {
 public:
   vector<Slide> show;
+
+  void operator=(Slideshow &other) {
+    show = other.show;
+  }
 
   ull evaluate() {
     ull ret = 0;
