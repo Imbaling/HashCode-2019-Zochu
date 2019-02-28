@@ -24,7 +24,7 @@ Picture readPicture()
     Picture pic;
     char type;
 
-    scanf(" %c %d", &type, &m);
+    int ignore = scanf(" %c %d", &type, &m);
     pic.paired = (type == 'V');
 
     for (int i = 0; i < m; i++)
@@ -116,6 +116,11 @@ public:
   void print() {
     cout << show.size() << endl;
     for (int i = 0; i < (int)show.size(); i++) {
+      if (show[i].first.paired) {
+        cout << show[i].first.id << " " << show[i].second.id << endl;
+      } else {
+        cout << show[i].first.id << endl;
+      }
     }
   }
 };
