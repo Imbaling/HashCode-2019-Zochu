@@ -6,7 +6,7 @@ using ull = unsigned long long;
 
 class Picture {
 public:
-  char type;
+  int id;
   bool paired;
   set<string> tags;
 };
@@ -22,9 +22,10 @@ Picture readPicture()
     int m;
     char s[MAX_TAG];
     Picture pic;
+    char type;
 
-    int ignore = scanf(" %c %d", &pic.type, &m);
-    pic.paired = (pic.type == 'V');
+    scanf(" %c %d", &type, &m);
+    pic.paired = (type == 'V');
 
     for (int i = 0; i < m; i++)
     {
@@ -48,6 +49,7 @@ vector<Picture> readPictures()
     for (int i = 0; i < n; i++)
     {
         pics.push_back(readPicture());
+        pics[i].id = i;
     }
 
     return pics;
