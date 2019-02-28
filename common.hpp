@@ -72,6 +72,22 @@ public:
       tags.insert(tag);
   }
 
+  Slide& operator=(const Slide& s)
+  {
+      first = s.first;
+      second = s.second;
+      tags = s.tags;
+
+      return *this;
+  }
+
+  void swap(Slide &a, Slide &b)
+  {
+      Slide tmp = a;
+      a = b;
+      b = tmp;
+  }
+
   Picture &first;
   Picture &second;
 
