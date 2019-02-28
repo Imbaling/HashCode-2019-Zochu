@@ -22,9 +22,10 @@ Picture readPicture()
     int m;
     char s[MAX_TAG];
     Picture pic;
+    char type;
 
-    scanf(" %c %d", &pic.type, &m);
-    pic.paired = (pic.type == 'V');
+    scanf(" %c %d", &type, &m);
+    pic.paired = (type == 'V');
 
     for (int i = 0; i < m; i++)
     {
