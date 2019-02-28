@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bouncheck/Documents/HashCode-2019-Zochu/wojt/main.cpp
+stdio.h
+-
+iostream
+-
+string
+-
+climits
+-
+cassert
+-
+functional
+-
+cstdlib
+-
+vector
+-
+fstream
+-
+algorithm
+-
+unordered_map
+-
+map
+-
+sstream
+-
+bitset
+-
+
