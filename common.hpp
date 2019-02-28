@@ -82,10 +82,11 @@ public:
   }
 
   void swap(Slide &a, Slide &b)
-  {
+  {cerr<<a.first.id<<" "<<b.first.id<<endl;
       Slide tmp = a;
       a = b;
       b = tmp;
+      cerr<<a.first.id<<" "<<b.first.id<<endl;
   }
 
   Picture first;
@@ -146,3 +147,8 @@ public:
     }
   }
 };
+
+int rnd(int a, int b)
+{
+    return (rand() % (b - a + 1)) + a;
+}
