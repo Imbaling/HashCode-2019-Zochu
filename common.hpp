@@ -100,6 +100,11 @@ public:
   vector<Slide> show;
 
   ull evaluate() {
+    ull ret = 0;
+    for (int i = 0; i < show.size() - 1; i++) {
+      ret += show[i] + show[i+1];
+    }
 
+    return ret;
   }
 };
