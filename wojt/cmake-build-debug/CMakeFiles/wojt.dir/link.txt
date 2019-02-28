@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/wojt.dir/main.cpp.o  -o wojt 
+/usr/bin/c++  -Ofast -g   CMakeFiles/wojt.dir/main.cpp.o  -o wojt 
