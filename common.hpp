@@ -92,11 +92,13 @@ public:
 
     ull diff2 = 0;
     for (string tag: b.tags) {
-      if (tags.find(tag) == b.tags.end())
+      if (tags.find(tag) == tags.end())
         diff2++;
     }
 
-    return min(inter, min(diff1, diff2));
+    ull ret = min(inter, min(diff1, diff2));
+
+    return ret;
   }
 };
 
