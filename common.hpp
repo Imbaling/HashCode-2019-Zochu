@@ -4,6 +4,7 @@ using namespace std;
 
 class Picture {
 public:
+  char type;
   vector<string> tags;
 };
 
@@ -20,6 +21,6 @@ public:
   vector<Slide> show;
 
   unsigned long long evaluate() {
-    
+
   }
-}
+};
