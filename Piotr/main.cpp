@@ -39,10 +39,57 @@ long long get_result(vector<struct grupka>& grupki) {
         }
 
         set<string> wspol;
-        wspol.insert(elem1.begin(), elem1.end());
-        wspol.insert(elem2.begin(), elem2.end());
+        for (auto& polewej : elem1) {
+            if (elem2.count(polewej) > 0) wspol.insert(polewej);
+        }
 
         res += min(wspol.size(), min(elem1.size() - wspol.size(), elem2.size() - wspol.size()));
+    }
+    return res;
+}
+
+long long co_po_zmianie(vector<struct grupka>& grupki, int poz) {
+    long long res = 0;
+
+    if (poz > 0) {
+        set<string> elem1;
+        for (auto& elem : grupki[poz - 1].o1.tagi) elem1.insert(elem);
+        if (grupki[poz - 1].o1.orient == 'V') {
+            for (auto& elem : grupki[poz - 1].o2.tagi) elem1.insert(elem);
+        }
+
+        set<string> elem2;
+        for (auto& elem : grupki[poz].o1.tagi) elem2.insert(elem);
+        if (grupki[poz].o1.orient == 'V') {
+            for (auto& elem : grupki[poz].o2.tagi) elem2.insert(elem);
+        }
+
+        set<string> wspol;
+        for (auto& polewej : elem1) {
+            if (elem2.count(polewej) > 0) wspol.insert(polewej);
+        }
+
+        res -= min(wspol.size(), min(elem1.size() - wspol.size(), elem2.size() - wspol.size()));
+    }
+    if (poz + 1 < grupki.size()) {
+        set<string> elem1;
+        for (auto& elem : grupki[poz + 1].o1.tagi) elem1.insert(elem);
+        if (grupki[poz + 1].o1.orient == 'V') {
+            for (auto& elem : grupki[poz + 1].o2.tagi) elem1.insert(elem);
+        }
+
+        set<string> elem2;
+        for (auto& elem : grupki[poz].o1.tagi) elem2.insert(elem);
+        if (grupki[poz].o1.orient == 'V') {
+            for (auto& elem : grupki[poz].o2.tagi) elem2.insert(elem);
+        }
+
+        set<string> wspol;
+        for (auto& polewej : elem1) {
+            if (elem2.count(polewej) > 0) wspol.insert(polewej);
+        }
+
+        res -= min(wspol.size(), min(elem1.size() - wspol.size(), elem2.size() - wspol.size()));
     }
     return res;
 }
@@ -93,17 +140,22 @@ int main() {
 
     std::uniform_int_distribution<> dis(0, bestGrupki.size() - 1);
 
-    for (int iter = 0; iter < 100; iter++) {
-        auto noweGrupki = bestGrupki;
+    for (int iter = 0; iter < 250000 * 10; iter++) {
         int pos1 = dis(g);
         int pos2 = dis(g);
-        swap(noweGrupki[pos1], noweGrupki[pos2]);
-        auto nowyScore = get_result(noweGrupki);
-        if (nowyScore > bestScore) {
-            bestScore = nowyScore;
-            bestGrupki = noweGrupki;
+        if (abs(pos1 - pos2) <= 3) continue;
+        auto jakiNowyWynik = bestScore + co_po_zmianie(bestGrupki, pos1) + co_po_zmianie(bestGrupki, pos2);
+        swap(bestGrupki[pos1], bestGrupki[pos2]);
+        jakiNowyWynik -= co_po_zmianie(bestGrupki, pos1) + co_po_zmianie(bestGrupki, pos2);
+        if (jakiNowyWynik > bestScore) {
+            // spoko
+            bestScore = jakiNowyWynik;
+        } else {
+            // rollback
+            swap(bestGrupki[pos1], bestGrupki[pos2]);
         }
     }
+    std::cerr << bestScore << endl;
 
     cout << bestGrupki.size() << endl;
     for (auto& grupka : bestGrupki) {
