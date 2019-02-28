@@ -24,12 +24,13 @@ Picture readPicture()
     Picture pic;
 
     scanf(" %c %d", &pic.type, &m);
+    pic.paired = (pic.type == 'V');
 
     for (int i = 0; i < m; i++)
     {
         scanf("%s", s);
 
-        pic.tags.push_back(s);
+        pic.tags.insert(s);
     }
 
     return pic;
@@ -53,18 +54,18 @@ vector<Picture> readPictures()
 
 class Slide {
 public:
-  Slide(Picture &a) first(a), second(guard) {
+  Slide(Picture &a): first(a), second(guard) {
     assert(a.paired == false);
 
     tags = a.tags;
   }
 
-  Slide(Picture &a, Picture &b) first(a), second(b) {
+  Slide(Picture &a, Picture &b): first(a), second(b) {
     assert(a.paired);
     assert(b.paired);
 
     tags = a.tags;
-    for (string &tag: b.tags)
+    for (string tag: b.tags)
       tags.insert(tag);
   }
 
@@ -75,19 +76,19 @@ public:
 
   ull operator+(Slide &b) const {
     ull inter = 0;
-    for (string &tag: tags) {
+    for (string tag: tags) {
       if (b.tags.find(tag) != b.tags.end())
         inter++;
     }
 
     ull diff1 = 0;
-    for (string &tag: tags) {
+    for (string tag: tags) {
       if (b.tags.find(tag) == b.tags.end())
         diff1++;
     }
 
     ull diff2 = 0;
-    for (string &tag: b.tags) {
+    for (string tag: b.tags) {
       if (tags.find(tag) == b.tags.end())
         diff2++;
     }
@@ -101,6 +102,18 @@ public:
   vector<Slide> show;
 
   ull evaluate() {
+    ull ret = 0;
+    for (int i = 0; i < show.size() - 1; i++) {
+      ret += show[i] + show[i+1];
+    }
 
+    return ret;
+  }
+
+  void print() {
+    cout << show.size() << endl;
+    for (int i = 0; i < show.size(); i++) {
+      cout <<
+    }
   }
 };
