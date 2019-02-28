@@ -23,15 +23,17 @@ Picture readPicture()
     char s[MAX_TAG];
     Picture pic;
 
-    scanf(" %c %d", &pic.type, &m);
+    int ignore = scanf(" %c %d", &pic.type, &m);
     pic.paired = (pic.type == 'V');
 
     for (int i = 0; i < m; i++)
     {
-        scanf("%s", s);
+        ignore = scanf("%s", s);
 
         pic.tags.insert(s);
     }
+
+    (void)ignore;
 
     return pic;
 }
@@ -102,7 +104,7 @@ public:
 
   ull evaluate() {
     ull ret = 0;
-    for (int i = 0; i < show.size() - 1; i++) {
+    for (int i = 0; i < (int)show.size() - 1; i++) {
       ret += show[i] + show[i+1];
     }
 
@@ -111,8 +113,7 @@ public:
 
   void print() {
     cout << show.size() << endl;
-    for (int i = 0; i < show.size(); i++) {
-      cout <<
+    for (int i = 0; i < (int)show.size(); i++) {
     }
   }
 };
