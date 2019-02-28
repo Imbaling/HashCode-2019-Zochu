@@ -6,7 +6,7 @@ using ull = unsigned long long;
 
 class Picture {
 public:
-  char type;
+  int id;
   bool paired;
   set<string> tags;
 };
@@ -45,6 +45,7 @@ vector<Picture> readPictures()
     for (int i = 0; i < n; i++)
     {
         pics.push_back(readPicture());
+        pics[i].id = i;
     }
 
     return pics;
